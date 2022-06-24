@@ -37,13 +37,13 @@
             </div>
             <div class="card-body shadow">
                 <div th:if="${fail}" class="alert alert-danger" role="alert">
-                    Логин или пароль введены неверно!
+                    Номер телефона или пароль введены неверно!
                 </div>
                 <form th:action="@{/login}" method="POST">
-                    <label for="email">Почта</label>
+                    <label for="phone">Номер телефона</label>
                     <div class="form-group row justify-content-center">
-                        <input type="email" placeholder="example@gmail.com" class="form-control bg-light col-md-6"
-                               name="email" id="email" required>
+                        <input type="tel" placeholder="+7(777)777-77-77" class="form-control bg-light col-md-6"
+                               name="phone" id="phone" required>
                     </div>
                     <div class="form-group">
                         <label for="password">Пароль</label>

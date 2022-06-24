@@ -18,10 +18,10 @@ public class UserDBStore implements StoreTransaction {
         return Optional.of((User) transaction(session -> session.merge(user), sf));
     }
 
-    public Optional<User> findUserByEmailAndPwd(String email, String password) {
+    public Optional<User> findUserByPhoneAndPwd(String phone, String password) {
         return transaction(session -> session
-                        .createQuery("FROM User u WHERE u.email = :email AND u.password = :password")
-                        .setParameter("email", email)
+                        .createQuery("FROM User u WHERE u.phone = :phone AND u.password = :password")
+                        .setParameter("phone", phone)
                         .setParameter("password", password)
                         .uniqueResultOptional(),
                 sf);

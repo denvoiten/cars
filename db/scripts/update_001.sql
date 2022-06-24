@@ -1,9 +1,9 @@
 CREATE TABLE IF NOT EXISTS users (
     id SERIAL PRIMARY KEY,
     name VARCHAR(128),
-    email VARCHAR(128),
+    phone VARCHAR(128),
     password TEXT,
-    CONSTRAINT email_unique UNIQUE (email)
+    CONSTRAINT phone_unique UNIQUE (phone)
 );
 
 CREATE TABLE IF NOT EXISTS brand(
@@ -33,6 +33,7 @@ INSERT INTO transmission(name) VALUES ('Механическая');
 CREATE TABLE if not exists advertisement (
     id SERIAL PRIMARY KEY,
     name TEXT,
+    price INT,
     description TEXT,
     photo BYTEA,
     sold BOOLEAN,
@@ -44,7 +45,7 @@ CREATE TABLE if not exists advertisement (
 );
 
 CREATE TABLE IF NOT EXISTS users_advertisement (
-   id SERIAL PRIMARY KEY,
-   advertisement_id INT NOT NULL REFERENCES advertisement,
-   users_id INT NOT NULL REFERENCES users
+    id SERIAL PRIMARY KEY,
+    advertisement_id INT NOT NULL REFERENCES advertisement,
+    users_id INT NOT NULL REFERENCES users
 );

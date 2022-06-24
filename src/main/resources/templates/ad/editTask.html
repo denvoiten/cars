@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+            integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>AUTO</title>
+</head>
+<body>
+<div class="container">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow">
+        <a class="navbar-brand" th:href="@{/index}">AUTO</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <ul class="nav nav-pills">
+                    <a class="nav-item nav-link bg-light" th:href="@{/index}">Все объявления</a>
+                </ul>
+            </div>
+        </div>
+        <div class="navbar-nav justify-content-end">
+            <ul class="nav nav-pills">
+                <div th:if="${user.name != null}">
+                    <a class="nav-item nav-link" th:if="${user.name == 'Гость'}" th:href="@{/loginPage}">
+                        <span th:text="${user.name}"></span>
+                        <span> | Войти</span>
+                    </a>
+                    <a class="nav-item nav-link" th:if="${user.name != 'Гость'}" th:href="@{/logout}">
+                        <span th:text="${user.name}"></span>
+                        <span> | Выйти</span>
+                    </a>
+                </div>
+            </ul>
+        </div>
+    </nav>
+    <div class="card shadow" style="width: 100%">
+        <div class="card-header">
+            Редактирование объявления
+        </div>
+        <div class="card-body">
+            <form th:action="@{/editAd}" method="POST" th:object="${ad}" enctype="multipart/form-data">
+                <input type="hidden" name="id" th:field="*{id}"/>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-9">
+                            <label for="name" class="col">Название
+                                <input type="text" class="form-control" placeholder="Объявление" name="name"
+                                       id="name" th:field="*{name}" required>
+                            </label>
+                        </div>
+                        <div class="col-3">
+                            <label for="price" class="col">Цена(руб)
+                                <input type="number" class="form-control" placeholder="" name="price"
+                                       id="price" th:field="*{price}"required>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <label for="brand.id" class="col">Марка
+                                <select class="form-control" id="brand.id" name="brandID" required>
+                                    <option th:each="brand : ${brand}"
+                                            th:value="${brand.id}"
+                                            th:text="${brand.name}">
+                                    </option>
+                                </select>
+                            </label>
+                        </div>
+                        <div class="col">
+                            <label for="body.id" class="col">Корпус
+                                <select class="form-control" id="body.id" name="bodyID" required>
+                                    <option th:each="body : ${body}"
+                                            th:value="${body.id}"
+                                            th:text="${body.name}">
+                                    </option>
+                                </select>
+                            </label>
+                        </div>
+                        <div class="col">
+                            <label for="transmission.id" class="col">Коробка
+                                <select class="form-control" id="transmission.id" name="transmissionID" required>
+                                    <option th:each="transmission : ${transmission}"
+                                            th:value="${transmission.id}"
+                                            th:text="${transmission.name}">
+                                    </option>
+                                </select>
+                            </label>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="description" class="col">Описание
+                            <textarea class="form-control" placeholder="Введите описание"
+                                      name="description"
+                                      id="description" rows="4" th:field="*{description}"></textarea>
+                        </label>
+                        <label for="file">Фотография</label>
+                        <input type="file" class="form-control" name="file" id="file">
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary shadow mt-3">Сохранить</button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -21,7 +21,7 @@ public class User implements Serializable {
     private int id;
     private String name;
 
-    private String email;
+    private String phone;
     private String password;
 
     @Override
@@ -33,12 +33,12 @@ public class User implements Serializable {
             return false;
         }
         User user = (User) o;
-        return id == user.id && Objects.equals(name, user.name) && Objects.equals(email, user.email);
+        return id == user.id && Objects.equals(name, user.name) && Objects.equals(phone, user.phone);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, email);
+        return Objects.hash(id, name, phone);
     }
 }
 
