@@ -39,7 +39,7 @@ public class AdDBStore implements StoreTransaction {
 
     public List<Advertisement> findAll() {
         return transaction(session -> session
-                        .createQuery("from Advertisement a ORDER BY a.id")
+                        .createQuery("from Advertisement a ORDER BY a.sold")
                         .getResultList(),
                 sf);
     }
