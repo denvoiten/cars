@@ -6,7 +6,7 @@
 Web-приложение для размещения объявлений о продаже автомобилей.
 
 #### Технологии
-> JDK17, Maven, PostgreSQL, Hibernate, HQL
+> JDK11, Maven, PostgreSQL, Hibernate, HQL
 
 
 ## Использование
